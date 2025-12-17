@@ -19,6 +19,25 @@ function App() {
         }
       ]
     })
+
+    setNewItem('');
+  }
+
+  function toggleTodo(id, completed) {
+    setNewTodos(currentTodos => {
+      return currentTodos.map(todo => {
+        if (todo.id === id) {
+          return {...todo, completed}
+        }
+        return todo;
+      })
+    })
+  }
+
+  function deleteTodo(id) {
+    setNewTodos(currentTodos => {
+      return currentTodos.filter(todo => todo.id !== id)
+    })
   }
 
   return (
@@ -40,12 +59,22 @@ function App() {
       <ul className='list'>
         {newTodos.map(newTodo => {
           return (
-            <li>
+            <li key={newTodo.id}>
               <label>
-                <input type='checkbox' checked={newTodo.completed} />
+                <input 
+                  type='checkbox' 
+                  checked={newTodo.completed} 
+                  onChange={e => toggleTodo(newTodo.id, e.target.checked)}
+                />
                 {newTodo.title}
               </label>
-              <button className='btn btn-danger'>Delete</button>
+
+              <button 
+                onClick={() => deleteTodo(newTodo.id)} 
+                className='btn btn-danger'
+              >
+                Delete
+                </button>
             </li>
           )
         })}
