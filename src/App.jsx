@@ -57,6 +57,7 @@ function App() {
       </form>
       <h2 className='header'>Todo List</h2>
       <ul className='list'>
+        {newTodos.length === 0 && "No Todos...yet"}
         {newTodos.map(newTodo => {
           return (
             <li key={newTodo.id}>
