@@ -5,6 +5,7 @@ import './styles.css'
 
 
 function App() {
+  // useState([]); is no longer used below as we want the state to persist when refreshed so the state is "lazy initialized" with the value of the local storage and if null then we return an empty array
   const [newTodos, setNewTodos] = useState(() => {
     const localValue = localStorage.getItem('todos');
     if (localValue == null) return [];
